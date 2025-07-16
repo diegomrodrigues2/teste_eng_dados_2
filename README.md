@@ -8,7 +8,7 @@ Segue minha solução para o desafio para vaga de Engenheiro de Dados no Itaú.
 
 
 
-![Teste Eng de Dados Itau](./3. DesenhoDeArquitetura/Teste Eng de Dados Itau.png)
+![Teste Eng de Dados Itau](.//3.%20DesenhoDeArquitetura/Teste%20Eng%20de%20Dados%20Itau.png)
 
 
 
