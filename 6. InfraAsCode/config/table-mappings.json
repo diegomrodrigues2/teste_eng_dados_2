@@ -1,0 +1,29 @@
+{
+  "rules": [
+    {
+      "rule-type": "selection",
+      "rule-id": "1",
+      "rule-name": "select_all_tables",
+      "object-locator": {
+        "schema-name": "clientesdb",
+        "table-name": "%"
+      },
+      "rule-action": "include",
+      "filters": []
+    },
+    {
+      "rule-type": "object-mapping",
+      "rule-id": "2",
+      "rule-name": "map_clientes_table",
+      "rule-action": "map-record-to-record",
+      "object-locator": {
+        "schema-name": "clientesdb",
+        "table-name": "clientes"
+      },
+      "target-table-name": "clientes",
+      "mapping-parameters": {
+        "partition-key-type": "schema-table"
+      }
+    }
+  ]
+} 

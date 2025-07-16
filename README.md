@@ -1,162 +1,156 @@
-# Teste Prático para Engenharia de Dados
-
-## Introdução
-
-O teste é destinado a avaliar as habilidades práticas como Engenheir@ de dados
-
-**Itens do teste:**
-1. ETL
-2. Análise dos dados
-3. Desenho de Arquitetura para ingestão de dados batch
-4. Implementação de um Data quality
-5. Desenvolvimento de testes unitários
-6. Infra as Code (IaC)
-
-## Fork
-Realize um fork do repositorio e após a conclusão submeta um pull request. Através do PR que as respostas serão revisadas.
-
-## Sugestão de estrutura dos arquivos de resposta
-```bash
-├── 1.ETL/
-│   └── script.py
-├── 2.AnaliseDados/
-│   └── analise.txt
-├── 3.DesenhodeArquitetura/
-│   ├── desenho.jpg
-│   └── explicacao.txt
-├── 4.DataQuality/
-│   └── script_data_quality.py
-├── 5.TesteUnitario/
-│   ├── unit_test.py
-│   └── resultados.txt
-└── 6.InfraAsCode/
-    └── script.tf
- ```
-
-## Docker
-Disponibilizamos também um docker compose para criação de um ambiente spark para desenvolvimento na própria maquina, a utilização não é obrigatória.
-
-## Desafios
-
-### 1. ETL
-
-#### Descrição
-
-Utilize o arquivo `clientes_sinteticos.csv`.
-
-Deverá ser gerado um único script que irá escrever em 2 buckets da AWS, um deles Bronze e o outro Silver.
-
-Ambos os arquivos escritos no bucket Bronze e Silver devem estar acessíveis atraves do Glue Data Catalog, o schema de cata tabela pode ser definido por você mas considere que ambas as tabelas já foram criadas(nao a necessidade de criacao). A partição física devera ser a data de processamento e o nome da particao será **anomesdia**, lembre que além da partição física será necessario criar a partição lógica na tabela.
-
-Passos:
-- Especifique um schema para o dataset.
-- Trate os nomes dos clientes para que fique todos com letra maiuscula
-- Renomeie a coluna telefone_cliente para num_telefone_cliente
-- Realize a escrita do dado no bucket s3://bucket-bronze/tabela_cliente_landing
-- Deduplique o dataset mantendo sempre somente a ultima data de atualizacao do cadastro de cada cliente 
-- Trate a coluna de telefone de modo a permitir somente valores que sigam o padrao (NN)NNNNN-NNNN os demais devem ficar nulos
-- Realize a escrita do dado no bucket s3://bucket-silver/tb_cliente
----
-
-### 2. Análise dos dados
-
-Utilize o arquivo `clientes_sinteticos.csv`.
-#### Descrição
-
-- Identifique os 5 clientes que mais sofreram atualizações na base.
-- Calcule a média de idade dos clientes.
----
-
-### 3. Desenho de Arquitetura
-
-#### Descrição
-
-Proponha uma arquitetura na AWS para coletar dados de cadastros de clientes em um banco MySQL. Esses dados devem ser persistidos em um datalake que usa a arquitetura medalhão:
-
-- Desenhe um sistema para coletar dados do banco MySQL realizando CDC.
-- O processamento e escrita deve ser projetado para os 3 niveis do lake (bronze, silver e gold)
-- Além do armazenamento do dado será necessaria uma governança de acesso a nível de usuário
----
-
-### 4. Data Quality
-
-#### Descrição
-
-A qualidade dos dados é fundamental para garantir que as análises e os insights derivados sejam confiáveis. 
-
-- Considere que voce está implementando o processo de Qualidade dos dados na camada Silver do lake na tabela de clientes que você ja preparou anteriormente.
-- Crie um script de modo a validar as dimensões de qualidade que você julgue necessario para esse dataset.
----
-
-### 5. Teste Unitário
-
-#### Descrição
-
-Os testes unitários são fundamentais para garantir a robustez e confiabilidade do código, permitindo identificar e corrigir bugs e erros antes que eles atinjam o ambiente de produção. Para este desafio:
-
-- Escolha uma das funções ou classes que você implementou nas etapas anteriores deste teste.
-- Escreva testes unitários para esta função ou classe. Os testes devem cobrir:
-  - Casos padrão ou "happy path".
-  - Casos de borda ou extremos.
-  - Situações de erro ou exceção.
-- Utilize uma biblioteca de testes de sua escolha (como `pytest`, `unittest`, etc.).
----
-
-### 6. Infra as Code
-#### Descrição
-- Desenvolva um script Terraform que crie um Glue Job. Abaixo alguns parametros que o serviço deve ter.
-- Parametros
-  - Script : script desenvolvido na etapa 2
-  - Versão: 5
-  - Workers: 10
-  - Tipo de Máquina: G1x
-  - Tag: 
-     - Nome: projeto  
-     - Valor: teste_eng_dados
+# Solução Teste Engenharia de Dados Itaú
 
 
 
-# O que é esperado do candidato
+**Diego Magalhães Rodrigues**
 
-Caro candidato, o teste prático proposto visa avaliar suas habilidades, competências e abordagem como Engenheiro de Dados. Aqui está o que esperamos de você:
-
-## 1. Atenção aos Detalhes
-
-Verifique cuidadosamente cada etapa do teste, garantindo que nenhum detalhe foi perdido. Em Engenharia de Dados, muitas vezes os detalhes são cruciais para o sucesso de um projeto.
-
-## 2. Qualidade do Código
-
-Esperamos que o código que você produza seja claro, legível e bem organizado. Isso inclui:
-- Uso adequado de funções, classes e módulos.
-- Comentários relevantes.
-- Nomes significativos para variáveis e funções.
-- Performance utilizando o Framework Spark
-
-## 3. Eficiência
-
-Mais do que apenas escrever um código funcional, é importante demonstrar preocupação com a eficiência. Leve em consideração a performance da sua solução, especialmente em cenários que envolvem grandes volumes de dados.
+Segue minha solução para o desafio para vaga de Engenheiro de Dados no Itaú.
 
 
-## 4. Familiaridade com Ferramentas e Tecnologias
 
-Este desafio também tem o objetivo de verificar seu domínio sobre tecnologias como Apache Spark e AWS. Aproveite a oportunidade para mostrar como utiliza essas ferramentas na prática, de forma estratégica e eficaz.
-
-
-## 5. Arquitetura de Solução
-
-Na parte de Arquitetura, queremos entender como você projeta sistemas que sejam robustos e preparados para escalar. Avaliaremos sua atenção a pontos como resiliência, custo-benefício, manutenção e crescimento da solução.
+![Teste Eng de Dados Itau](./images/Teste Eng de Dados Itau.png)
 
 
-## 6. Capacidade de Trabalhar de Forma Independente
 
-Você pode e deve consultar fontes externas, mas queremos ver como você se organiza, toma decisões e resolve problemas com os recursos disponíveis, demonstrando autonomia.
+## 1. ETL
 
 
-## 7. Comunicação
 
-Além da parte técnica, valorizamos sua habilidade de explicar suas decisões. Ao final do teste, será importante justificar suas escolhas e descrever seu raciocínio de forma clara e objetiva.
-O propósito do teste vai além de respostas certas ou erradas. Queremos entender como você pensa, resolve problemas e se envolve com a área de Engenharia de Dados. Estamos empolgados para conhecer o seu trabalho!
+Para ETL resolvi adotar uma abordagem simples mas efetiva de um único script realizar a escrita na bronze e silver layers (s3 bucket paths passados via Glue). Ele foi projetado para ser executado via Glue Job e não localmente e como podemos ver nos prints abaixo ele realiza as tranformações e salva particionado usando **anomesdia** conforme solicitados nos requisitos.
 
----
 
-Boa sorte!
+
+## 2. Análise de Dados
+
+
+
+A análise de dados sim foi realizada localmente e seus resultados foram:
+
+```
+# cod_cliente	count	nm_cliente
+# 396	        5	    SARAH ALLEN
+# 479	        5	    JASMINE BAUTISTA
+# 855	        4	    DAVID PETERS
+# 878	        5	    JENNIFER JARVIS
+# 925	        3	    CHRISTIAN GATES
+```
+
+e:
+
+```
+# media_idade_cliente
+# 50.70780856423174 -> 51 anos
+```
+
+
+
+O código pode ser encontrado na pasta **/2. AnaliseDados** desse respositório.
+
+
+
+## 3. Desenho de Arquitetura
+
+
+
+Conforme solicitado, foi gerado um desenho de uma arquitetura de uma ingestão via CDC a partir de um banco de dados MySQL (RDS) alimentando as ETLs que populam os buckets com dados bronze e silver. Para diminuir custos e adotar uma abordagem focada na AWS optei por usar DMS (Database Management Service), Kinesis Streaming e Firehouse para mover os logs de alteração da tabela clientes no banco até um bucket de landing zone onde esses dados não tratados seriam posteriormente tratados por um job Glue Spark que irá consolidar e sobrescrever a tabela bronze, seguindo a arquitetura medallion.
+
+
+
+Posteriormente, glue crawler são schedulados via triggers no EventBridge para popular tabelas acessíveis no Athena com controle de acesso via roles (Administrador, Data Engineer e Data Scientist). Por último, uma view é usada para fornecer dados finais tratados usando o Athena e com possibilidade de materialização num bucket gold.
+
+Todos os componentes dessa arquitetura estão descritos nos arquivos terraforms na pasta **/6. InfraAsCode**. 
+
+
+
+### Buckets S3:
+
+![image-20250716134039043](./images/image-20250716134039043.png)
+
+### Glue Jobs:
+
+![image-20250716134136623](./images/image-20250716134136623.png)
+
+![image-20250716134321690](./images/image-20250716134321690.png)
+
+![image-20250716134422972](./images/image-20250716134422972.png)
+
+
+
+![image-20250716134520388](./images/image-20250716134520388.png)
+
+
+
+### Glue Crawlers
+
+![image-20250716134616134](./images/image-20250716134616134.png)
+
+![image-20250716134802652](./images/image-20250716134802652.png)
+
+![image-20250716135344354](./images/image-20250716135344354.png)
+
+
+
+### Athena Tables (Datalake)
+
+![image-20250716135606569](./images/image-20250716135606569.png)
+
+
+
+
+
+### IAM Roles
+
+![image-20250716134939029](./images/image-20250716134939029.png)
+
+![image-20250716134956686](./images/image-20250716134956686.png)
+
+![image-20250716135026107](./images/image-20250716135026107.png)
+
+
+
+### RDS MySQL and Change Data Capture
+
+![image-20250716135200602](./images/image-20250716135200602.png)
+
+![image-20250716140254407](./images/image-20250716140254407.png)
+
+
+
+## 4. Data Quality
+
+
+
+Foi adotada uma abordagem simples auto-contida num script que gera um relatório json com as métricas de qualidade podendo tanto ser rodado num job glue e posteriormente salvo numa tabela especifica para acompanhamento.
+
+
+
+## 5. Teste Unitário
+
+
+
+Foi usado um setup simples de testes unitários com **pytest-spark** de forma que não precise de um cluster spark rodando para validar transformações nos dados. Além disso, todas referências ao glue no script foram mockadas para que esses testes possam rodar sem depender de estar num job glue. Assim, ficaria fácil integrá-lo numa pipeline de devops automatizada que rode num container pequeno de forma rápida.
+
+
+
+**ps:** estou com alguns problemas de rodá-los na minha máquina local devido o databricks connect que uso diáriamente no trabalho, mas pelo que consegui validar eles devem todos rodar com sucesso.
+
+
+
+## 6. InfraAsCode
+
+
+
+Tentei colocar o máximo da arquitetura nos arquivos terraforms desde a criação dos buckets, mysql database no rds, conexão do banco com o kinesis via DMS, IAM roles, scripts python necessários para rodar os jobs glue, schedules no Event Bridge do CloudWatch.
+
+Para replicar o ambiente bastar rodar o comando abaixo na pasta:
+``` 
+terraform apply
+```
+
+Como pode ver nos prints abaixo, os recursos foram de fato criados e os jobs estão rodando e criando os dados no formato parquet.
+
+
+
+**TODO:** Ainda não consegui criar um script que popule a tabela no banco MySQL e a partir dos logs recriarem a tabela bronze. Para isso, terei que fazer alguns ajustes no meu ETL e eventualmente nos testes. Mas todos recursos estão de pé e rodando normalmente no meu ambiente, todos deployados via terraform, então acredito que o diagrama está condizente e serviria de base para um sistema produtivo.
+
+

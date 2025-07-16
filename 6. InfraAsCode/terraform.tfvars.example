@@ -1,0 +1,10 @@
+# Example terraform.tfvars file
+# Copy this file to terraform.tfvars and update with your values
+
+# Database configuration
+db_username = "admin"
+db_password = "YourSecurePassword123!"
+db_name     = "clientesdb"
+
+# Note: In production, use environment variables or AWS Secrets Manager
+# for sensitive values like db_password 
